@@ -11,10 +11,3 @@ JSON
     "birthdate": "dd/mm",
     "city": "your-city"
 }
-
-
-{
-    "name": "your-name",
-    "Birthdate": "dd/mm",
-    "city": "your-city"
-}
