@@ -1,6 +1,6 @@
 Implement a POST API with end point
 
-
+That does following:
 - HTTP Method should be POST
 - end point should be /profile
 - Data will be saved as JSON in a file named
@@ -13,3 +13,5 @@ on every POST API call from Postman.
     "birthdate": "dd/mm",
     "city": "your-city"
 }
+
+Hint: Use https://expressjs.com/en/starter/basic-routing.html
