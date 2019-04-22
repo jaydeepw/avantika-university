@@ -1,0 +1,10 @@
+For the data saved in `profile.txt` on the server,
+add a profile picture
+
+After Task3, the response for the Task1 should look like
+{
+    "name": "your-name",
+    "birthdate": "dd/mm",
+    "city": "your-city",
+    "profile": "/pic.jpg"
+}

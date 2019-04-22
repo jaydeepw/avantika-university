@@ -1,0 +1,5 @@
+{
+    "name": "your-name",
+    "birthdate": "dd/mm",
+    "city": "your-city"
+}

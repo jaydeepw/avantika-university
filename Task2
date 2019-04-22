@@ -1,10 +1,12 @@
-Implement a GET API with end 
-point
+Implement a POST API with end point
 
-/profile
 
-which will return the data as 
-JSON
+- HTTP Method should be POST
+- end point should be /profile
+- Data will be saved as JSON in a file named
+`profile.txt` on the server. 
+- The data will be overwritten
+on every POST API call from Postman.
 
 {
     "name": "your-name",
