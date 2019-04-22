@@ -1,0 +1,13 @@
+Implement a GET API with end 
+point
+
+/profile
+
+which will return the data as 
+JSON
+
+{
+    "name": "your-name",
+    "birthdate": "dd/mm",
+    "city": "your-city"
+}
