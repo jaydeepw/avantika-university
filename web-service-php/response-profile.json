@@ -1,0 +1,46 @@
+{
+    "name_first": "Firstname",
+    "name_last": "Lastnamne",
+    "email": "someemil@email.com",
+    "city": "Indore",
+    "designation": "Senior Manager",
+    "contact_number": "98989898",
+    "age": 24,
+    "dob": "dd//mm/yyyy",
+    "dp": "url",
+    "address": "Shaniwar Peth, Pune",
+    "education": [
+      {
+        "inst_name": "MIT Pune",
+        "city": "Pune"
+      },
+      {
+        "inst_name": "Jubilee Junior College",
+        "city": "Nagpur"
+      },
+      {
+        "inst_name": "Govnt High School",
+        "city": "Nagpur"
+      }
+    ],
+    "experience": [
+      {
+        "company": "Tata Technologies",
+        "city": "Pune",
+        "year_from": "yyyy",
+        "year_to": "yyyy"
+      },
+      {
+        "company": "Wipro Technologies",
+        "city": "Hyd",
+        "year_from": "yyyy",
+        "year_to": "yyyy"
+      },
+      {
+        "company": "Sun Technologies",
+        "city": "Pune",
+        "year_from": "yyyy",
+        "year_to": "yyyy"
+      }
+    ]
+  }

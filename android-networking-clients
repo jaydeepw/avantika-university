@@ -1,0 +1,68 @@
+com.android.os.HttpClient - Deprecated in approx. Android 6.0.
+Not to used anymore. Building a complete web browser 
+on the device. Made by google and did not have any community process
+for its improvements. Open Source.
+
+java.net.HttpURLConnection - Was developed by Oracle(formerly Sun Microsystem). Recommended ways of doing network operations on device.
+Open For development.
+Link: https://docs.oracle.com/javase/7/docs/api/java/net/HttpURLConnection.html
+
+okhttp - Another famous http client build for Java. Built by engineers at Square. Becoming a goto choice for developers for implementation of networking  in the app. Open Source.
+ Link: https://square.github.io/okhttp/
+
+
+Retrofit: It is a wrapper over SOME HTTP CLIENT.
+- Built by Square Inc.
+- Open Source
+- Has http client
+- Has configurable JSON parser
+- Has configurable JSON mapper
+- Support RxJava
+- Link https://square.github.io/retrofit/
+- Much more.
+
+Volley: It is a wrapper over HttpClient(not sure).
+- Built by Google.
+- Open Source
+- Has http client
+- Has configurable JSON parser
+- Support RxJava
+- Link https://developer.android.com/training/volley/simple
+- Much more.
+
+is Volly a type of http client?
+
+
+class Person {
+    private String name;
+    private String city;
+    private String birthdate;
+    private ArrayList photos;
+    private Car mycar;
+}
+
+class Car {
+private String model;
+    private String make;
+}
+
+Type1
+Person person = new com.google.Gson(personJson);
+
+Type2
+org.json.JSONObject personJsonObject = new JSONObject()
+Person person = new Person();
+person.setName(personJsonObject.getAsString("name"))
+person.setCity(personJsonObject.getAsString("city"))
+
+
+personJson
+{
+    "name": "Jay",
+    "city": "Pune"
+    "myPhotos": ["url1", "url2"],
+    "mycar": {
+        "model" : "Honda GXI",
+        "make" : "Honda",
+    }
+}
