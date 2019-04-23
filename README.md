@@ -1,4 +1,4 @@
-# avantika-university
+# Visiting Faculty at Avantika University, Ujjain.
 Sample code and demo implemented during my lecture and hands on sessions at Avantika Universtiy, Ujjain.
 
 
