@@ -1,0 +1,5 @@
+Write a web service that reads the data from the database tables
+and returns it as a response in the format specified in `response-profile.json`
+
+The end point to request this data will be
+/profile
