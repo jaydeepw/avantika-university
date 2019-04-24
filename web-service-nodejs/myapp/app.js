@@ -8,8 +8,9 @@ app.get('/hello', (req, res) => res.send('Hello World!'))
 
 app.get('/bye', (req, res) => res.send('Good bye'))
 
-app.get('/json', (req, res) => res.send({
-    "name": "Jay"
-}))
+app.get('/profile', function(req, res) {
+    console.log("API called")
+    res.send('{"name_first": "Firstname"}')
+})
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
