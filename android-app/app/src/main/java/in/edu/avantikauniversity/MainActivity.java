@@ -1,5 +1,9 @@
 package in.edu.avantikauniversity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -8,10 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,23 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Call<Profile> call = ApiClient
-                .getRetrofit()
-                .getProfile("jaydeep.w@noemail.com");
-
-        call.enqueue(new Callback<Profile>() {
-            @Override
-            public void onResponse(Call<Profile> call, Response<Profile> response) {
-                Log.d(TAG, "Working");
-                Profile profile = response.body();
-                showProfile(profile);
-            }
-
-            @Override
-            public void onFailure(Call<Profile> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
-            }
-        });
+        Intent intent = new Intent(this, ProfileService.class);
+        intent.putExtra("email", "jaydeep.w@noemail.com");
+        startService(intent);
     }
 
     private void showProfile(Profile profile) {
@@ -52,4 +38,24 @@ public class MainActivity extends AppCompatActivity {
         // Set layout manager to position the items
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(profileReceived, new IntentFilter("com.example.intent.filter"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(profileReceived);
+    }
+
+    BroadcastReceiver profileReceived = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            Log.d(TAG, "aciton: " + action);
+        }
+    };
 }
