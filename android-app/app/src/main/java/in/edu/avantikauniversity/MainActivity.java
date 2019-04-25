@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private void showProfile(Profile profile) {
         ArrayList<Object> list = new ArrayList<>();
         list.add(profile);
+        list.add(profile.bio);
         RecyclerView recyclerView = findViewById(R.id.rvContacts);
         ProfileAdapter adapter = new ProfileAdapter(list);
         // Attach the adapter to the recyclerview to populate items

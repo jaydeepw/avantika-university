@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AvantikaAlumni</string>
     <string name="activity_title">Alumni Profile</string>
+    <string name="dummy_string">I go to college and discuss software development with students. It is very good exeperience to be here with students and discuss the ideas.</string>
 </resources>

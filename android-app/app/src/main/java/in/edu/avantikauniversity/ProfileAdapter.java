@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,9 +21,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public static final String TAG = ProfileAdapter.class.getSimpleName();
 
-    public static final int ITEM_TYPES = 2;
     public static final int ITEM_TYPE_PROFILE = 0;
-    public static final int ITEM_TYPE_NAME = 1;
+    public static final int ITEM_TYPE_BIO = 1;
 
     ArrayList<Object> list;
 
@@ -31,12 +32,17 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @NonNull
     @Override
-    public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == ITEM_TYPE_PROFILE) {
             View profileLayout = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.profile_pic, null, false);
+                    .inflate(R.layout.item_profile_pic, null, false);
             return new ProfileViewHolder(profileLayout);
-        } else {
+        } else if(viewType == ITEM_TYPE_BIO) {
+            View bioLayout = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_bio, null, false);
+            return new BioViewHolder(bioLayout);
+        }  else {
+            Log.w(TAG, "Invalid type of view received");
             return null;
         }
     }
@@ -46,7 +52,26 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (holder instanceof ProfileViewHolder) {
             Object possiblyProfile = list.get(position);
             bindProfile((Profile) possiblyProfile, (ProfileViewHolder) holder);
+        } else if (holder instanceof BioViewHolder) {
+            Object possiblyBio = list.get(position);
+            bindBio((String) possiblyBio, (BioViewHolder) holder);
+        } else {
+            Log.e(TAG, "Unable to bind this type");
         }
+    }
+
+    private void bindBio(String bio, BioViewHolder holder) {
+        holder.textViewBio.setText(bio);
+        holder.textViewBio.setTag(bio);
+        holder.textViewBio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),
+                        v.getTag().toString(),
+                        Toast.LENGTH_LONG)
+                .show();
+            }
+        });
     }
 
     private void bindProfile(Profile profile, ProfileViewHolder holder) {
@@ -64,8 +89,11 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Object object = list.get(position);
         if (object instanceof Profile) {
             return ITEM_TYPE_PROFILE;
+        } else if (object instanceof String) {
+            return ITEM_TYPE_BIO;
         } else {
-            return ITEM_TYPE_NAME;
+            Log.e(TAG,"Unknowntype of view");
+            return -1;
         }
     }
 
@@ -83,8 +111,18 @@ public class ProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 // to access the context from any ProfileViewHolder instance.
                 super(itemView);
 
-                imageView = (ImageView) itemView.findViewById(R.id.contact_name);
+                imageView = itemView.findViewById(R.id.contact_name);
             }
         }
+
+    public class BioViewHolder extends RecyclerView.ViewHolder {
+        public TextView textViewBio;
+
+        public BioViewHolder(View itemView) {
+            super(itemView);
+
+            textViewBio = itemView.findViewById(R.id.textview_bio);
+        }
+    }
     }
 
