@@ -5,5 +5,6 @@ public class Profile {
     public String name_last;
     public String email;
     public String city;
+    public String dp;
     public int age;
 }
