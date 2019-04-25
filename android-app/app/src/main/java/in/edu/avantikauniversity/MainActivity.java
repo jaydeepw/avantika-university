@@ -22,8 +22,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // layout the UI
         setContentView(R.layout.activity_main);
 
+        // call the background service to fetch the data
         Intent intent = new Intent(this, ProfileService.class);
         intent.putExtra("email", "jaydeep.w@noemail.com");
         startService(intent);
@@ -58,11 +60,16 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Log.d(TAG, "aciton: " + action);
-            String profileJson = intent.getStringExtra("data");
-            Profile profile = new Gson().fromJson(profileJson, Profile.class);
-            Log.d(TAG, "name: " + profile.name_first);
-            Log.d(TAG, "dp: " + profile.dp);
-            showProfile(profile);
+            if (action.equalsIgnoreCase("com.example.intent.filter")) {
+                String profileJson = intent.getStringExtra("data");
+                Profile profile = new Gson().fromJson(profileJson, Profile.class);
+                Log.d(TAG, "name: " + profile.name_first);
+                Log.d(TAG, "dp: " + profile.dp);
+                showProfile(profile);
+            } else {
+                Log.d(TAG, "Maybe useful intent action, but not of our interest");
+            }
+
         }
     };
 }

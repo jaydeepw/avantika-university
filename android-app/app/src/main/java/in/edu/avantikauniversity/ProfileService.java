@@ -10,6 +10,8 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -42,11 +44,17 @@ public class ProfileService extends IntentService {
         try {
             // using the same thread as that of the service.
             Response<Profile> result = call.execute();
-            Profile profile = result.body();
-            Intent returningIntent = new Intent("com.example.intent.filter");
-            String profileJson = new Gson().toJson(profile);
-            returningIntent.putExtra("data", profileJson);
-            sendBroadcast(returningIntent);
+            if (result.code() == HttpsURLConnection.HTTP_OK) {
+                Profile profile = result.body();
+                Intent returningIntent = new Intent("com.example.intent.filter");
+                String profileJson = new Gson().toJson(profile);
+                returningIntent.putExtra("data", profileJson);
+                sendBroadcast(returningIntent);
+            } else {
+                Log.e(TAG,"Some http error" + result.code()
+                        + " " + result.message());
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
