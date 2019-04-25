@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Log.d(TAG, "aciton: " + action);
+            String profileJson = intent.getStringExtra("data");
+            Profile profile = new Gson().fromJson(profileJson, Profile.class);
+            Log.d(TAG, "name: " + profile.name_first);
+            Log.d(TAG, "dp: " + profile.dp);
+            showProfile(profile);
         }
     };
 }

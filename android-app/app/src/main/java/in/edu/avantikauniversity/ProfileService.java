@@ -6,6 +6,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 
 import retrofit2.Call;
@@ -42,24 +44,11 @@ public class ProfileService extends IntentService {
             Response<Profile> result = call.execute();
             Profile profile = result.body();
             Intent returningIntent = new Intent("com.example.intent.filter");
+            String profileJson = new Gson().toJson(profile);
+            returningIntent.putExtra("data", profileJson);
             sendBroadcast(returningIntent);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        /*call.enqueue(new Callback<Profile>() {
-            @Override
-            public void onResponse(Call<Profile> call, Response<Profile> response) {
-                Log.d(TAG, "Working");
-                Profile profile = response.body();
-                // showProfile(profile);
-            }
-
-            @Override
-            public void onFailure(Call<Profile> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
-            }
-        });*/
     }
 }
