@@ -1,0 +1,3 @@
+- Insert all the data into the Database named alumni.db
+- Get all the data in a thread in MainActivity and display
+it in the Adapter of RecyclerView
