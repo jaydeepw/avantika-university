@@ -1,4 +1,4 @@
-package in.edu.avantikauniversity;
+package in.edu.avantikauniversity.views;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+
+import in.edu.avantikauniversity.ProfileService;
+import in.edu.avantikauniversity.R;
+import in.edu.avantikauniversity.models.Profile;
 
 public class MainActivity extends AppCompatActivity {
 

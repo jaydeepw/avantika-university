@@ -1,4 +1,4 @@
-package in.edu.avantikauniversity;
+package in.edu.avantikauniversity.views;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import in.edu.avantikauniversity.R;
+import in.edu.avantikauniversity.models.Profile;
 
 // Create the basic adapter extending from RecyclerView.Adapter
 // Note that we specify the custom ProfileViewHolder which gives us access to our views

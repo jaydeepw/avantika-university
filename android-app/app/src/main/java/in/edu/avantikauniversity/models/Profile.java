@@ -1,4 +1,4 @@
-package in.edu.avantikauniversity;
+package in.edu.avantikauniversity.models;
 
 public class Profile {
     public int id;

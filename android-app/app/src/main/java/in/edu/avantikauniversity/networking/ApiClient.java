@@ -1,4 +1,4 @@
-package in.edu.avantikauniversity;
+package in.edu.avantikauniversity.networking;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
