@@ -4,24 +4,31 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import in.edu.avantikauniversity.ProfileService;
 import in.edu.avantikauniversity.R;
+import in.edu.avantikauniversity.db.AppDatabase;
+import in.edu.avantikauniversity.models.Car;
 import in.edu.avantikauniversity.models.Profile;
+import in.edu.avantikauniversity.models.User;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,50 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProfileService.class);
         intent.putExtra("email", "jaydeep.w@noemail.com");
         startService(intent);
+
+        Thread dbThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                readTable();
+            }
+        });
+
+        dbThread.start();
+
+        saveKeyValues();
+        retrieveKeyValues();
+    }
+
+    private void retrieveKeyValues() {
+        String username = sharedPref
+                .getString("in.edu.avatikauniv.username", "unknown");
+        Log.d(TAG,"==> username: " + username);
+    }
+
+    private void saveKeyValues() {
+        // create the SP object.
+        sharedPref = getSharedPreferences(
+                "in.edu.avatikauniv.user_information", Context.MODE_PRIVATE);
+
+        // start editing/saving
+        SharedPreferences.Editor editor = sharedPref.edit();
+        // tell SP, which value to store for which key.
+        editor.putString("in.edu.avatikauniv.username", "jaydeepw");
+        // actually save the data.
+        editor.apply();
+    }
+
+    private void readTable() {
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "alumni.db").build();
+
+        List<User> allUsers = db.userDao().getAll();
+        Log.d(TAG, "allUsers.count: " + allUsers.size());
+        User first = allUsers.get(0);
+        Car car = first.car;
+        Log.d(TAG, "allUsers[0]: " + car.make);
+        Log.d(TAG, "allUsers[0]: " + car.model);
+        Log.d(TAG, "allUsers[0]: " + car.type);
     }
 
     private void showProfile(Profile profile) {

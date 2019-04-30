@@ -14,6 +14,7 @@ import java.io.IOException;
 import javax.net.ssl.HttpsURLConnection;
 
 import in.edu.avantikauniversity.db.AppDatabase;
+import in.edu.avantikauniversity.models.Car;
 import in.edu.avantikauniversity.models.Profile;
 import in.edu.avantikauniversity.models.User;
 import in.edu.avantikauniversity.networking.ApiClient;
@@ -43,7 +44,7 @@ public class ProfileService extends IntentService {
         Log.d(TAG, "==> Service is being called");
         String email = intent.getStringExtra("email");
         Log.d(TAG, "Calling the API for the email: " + email);
-        callApi(email);
+        // callApi(email);
 
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "alumni.db").build();
@@ -80,6 +81,13 @@ public class ProfileService extends IntentService {
         User user = new User();
         user.firstName = "Jaydeep";
         user.lastName = "W";
+
+        Car car =  new Car();
+        car.make = "Honda";
+        car.model = "Civic";
+        car.type = "Sedan";
+        user.car = car;
+
         db.userDao().insertAll(user);
         Log.i(TAG, "One user inserted in DB");
     }
